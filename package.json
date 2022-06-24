@@ -1,0 +1,17 @@
+{
+  "name": "find-a-pet",
+  "version": "1.0.0",
+  "description": "feature para associar pets aos possíveis donos",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hugo L Correia",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.0"
+  }
+}
