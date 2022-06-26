@@ -4,14 +4,15 @@
   "description": "feature para associar pets aos possíveis donos",
   "main": "server.js",
   "scripts": {
-   "server": "nodemon server.js",
-   "dev": "yarn server"
+    "server": "nodemon server.js",
+    "dev": "yarn server"
   },
   "author": "Hugo L Correia",
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "create-react-app": "^5.0.1",
     "express": "^4.18.1",
     "mongoose": "^6.4.0"
   },
