@@ -1,10 +1,37 @@
 const Quiz = require("../models/quiz.model")
 
-
-function fitness(){
+function filterPets(){
     return new Promise((resolve) =>{
+        // filtrar por espécie
+
+        // filtrar por sexo
+
+        // filtrar por porte
+
+        // filtrar por estado
         
-        resolve()
+        // filtrar por cidade (se houver)
+
+        resolve(/* pets filtrados */)
+    })
+    
+}
+
+function fitness(quizData){
+    return new Promise((resolve) =>{
+        const filteredPets = filterPets();
+        
+        // comparar rotina X temperamento
+
+        // comparar crianças X sociavel
+
+        // comparar gatos x sociavel
+
+        // comparar cachorros x sociavel
+
+        // comparar casa x ambiente
+
+        resolve(/* pet selecionado */)
     })
 }
 
@@ -17,6 +44,7 @@ module.exports = {
             porte_quiz,
             estado_quiz,
             cidade_quiz,
+
             rotina_quiz,
             casa_quiz,
             outros_pets_quiz,
