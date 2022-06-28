@@ -8,8 +8,56 @@ const QuizForm = () => {
   const [idade, setIdade] = useState();
   const [porte, setPorte] = useState();
 
+
+  const [uf, setUf] = React.useState('AC');
+  const [listUf, setListUf] = React.useState([]);
+  const [city, setCity] = React.useState('');
+  const [listCity, setListCity] = React.useState([]);
+  function loadUf() {
+      let url = 'https://servicodados.ibge.gov.br/';
+      url = url + 'api/v1/localidades/estados';
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {        
+          data.sort((a,b) => a.nome.localeCompare(b.nome));
+          setListUf([...data]);
+         });
+  }
+  function loadCity(id) {
+      let url = 'https://servicodados.ibge.gov.br/api/v1/';
+      url = url + `localidades/estados/${id}/municipios`;
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {        
+          data.sort((a,b) => a.nome.localeCompare(b.nome));
+          setListCity([...data]);
+         });
+  }
+  React.useEffect(() => {
+    loadUf();
+  },[]);
+  React.useEffect(() => {
+    if (uf) {
+      loadCity(uf);
+    }
+  }, [uf]);
+
   return (
     <div className={styles.formWrapper}>
+        <label> Qual seu estado?
+          <select value={uf} onChange={e => setUf(e.target.value)}>
+            {listUf.map((a, b) => ( 
+                <option value={a.id}>{a.sigla} - {a.nome}</option>
+            ))}
+          </select>
+        </label>
+        <label> Qual sua cidade?
+          <select value={city} onChange={e => setCity(e.target.value)}>
+            {listCity.map((a, b) => ( 
+                <option value={a.sigla}>{a.nome}</option>
+            ))}
+          </select>
+        </label>
         <label> Qual espécie procura?
           <select value={especie} onChange={(e) => setEspecie(e.target.value)}>
             <option value="TODOS" selected>Todos</option>
