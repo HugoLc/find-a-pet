@@ -1,0 +1,39 @@
+.selectBarPoint{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 5px solid white;
+    background-color:white;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top:50%;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+    
+    &:hover{
+        width: 15px;
+        height: 15px;
+        -webkit-box-shadow: 0px 0px 15px -6px #000000;
+        box-shadow: 0px 0px 15px -6px #000000;
+    }
+
+    &.selected{
+        background-color: greenyellow;
+    }
+
+    &[data-point-value="1"]{
+        left: 0;
+    }
+    &[data-point-value="2"]{
+        left: 25%;
+    }
+    &[data-point-value="3"]{
+        left: 50%;
+    }
+    &[data-point-value="4"]{
+        left: 75%;
+    }
+    &[data-point-value="5"]{
+        left: 100%;
+    }
+}
