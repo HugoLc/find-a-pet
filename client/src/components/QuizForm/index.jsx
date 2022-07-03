@@ -113,6 +113,10 @@ const QuizForm = () => {
             <option value={"APARTAMENTO"}>Apartamento</option>
           </select>
         </label>
+        <label> Há outro crianças e/ou pet na casa?
+          {/* fazer um select customizado */}
+        </label>
+
 
     </div>
   )
