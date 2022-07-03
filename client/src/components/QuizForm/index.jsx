@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './QuizForm.module.scss'
 import SelectBar from './SelectBar';
 
@@ -14,10 +14,16 @@ const QuizForm = () => {
   const [listUf, setListUf] = React.useState([]);
   const [city, setCity] = React.useState('');
   const [listCity, setListCity] = React.useState([]);
+  const [valueAtividade, setValueAtividade] = useState(0)
+  const [valueDisponibilidade, setValueDisponibilidade] = useState(0)
 
-  const onSelectAtividade = (value) => {
-    alert(value)
-  }
+
+  useEffect(() => {
+    console.log("valueAtividade",valueAtividade)
+    console.log("valueDisponibilidade",valueDisponibilidade)
+  
+  }, [valueAtividade,valueDisponibilidade])
+  
 
   function loadUf() {
       let url = 'https://servicodados.ibge.gov.br/';
@@ -94,8 +100,18 @@ const QuizForm = () => {
             <option value={"G"}>Grande</option>
           </select>
         </label>
-        <label > Como diria que é seu nível de atividade
-            <SelectBar min="Calmo" max="Agitado" onSelect={onSelectAtividade}/>
+        <label > Como diria que é seu nível de atividade?
+            <SelectBar min="Calmo" max="Agitado" onSelect={(value)=> setValueAtividade(value)}/>
+        </label>
+        <label > Quanto tempo em média terá disponível para o pet?
+            <SelectBar min="Pouco" max="Muito" onSelect={value => setValueDisponibilidade(value)}/>
+        </label>
+        <label> Casa ou apartamento?
+          <select value={porte} defaultValue={"TODOS"} onChange={(e) => setPorte(e.target.value)}>
+            <option value="TODOS" selected>Todos</option>
+            <option value={"CASA"}>Casa</option>
+            <option value={"APARTAMENTO"}>Apartamento</option>
+          </select>
         </label>
 
     </div>

@@ -1,8 +1,13 @@
-.selectBarBar{
-    width: 80%;
-    height: 10px;
-    border-radius: 10px;
-    background-color: white;
-    margin: 15px auto;
-    position: relative;
+.barWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .selectBarBar {
+        width: 80%;
+        height: 10px;
+        border-radius: 10px;
+        background-color: white;
+        margin: 15px auto;
+        position: relative;
+    }
 }
