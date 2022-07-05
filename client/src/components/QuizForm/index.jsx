@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import styles from './QuizForm.module.scss'
 import SelectBar from './SelectBar';
+import SelectBoxes from './SelectBoxes';
 
 const QuizForm = () => {
   const [especie, setEspecie] = useState();
@@ -114,7 +115,7 @@ const QuizForm = () => {
           </select>
         </label>
         <label> Há outro crianças e/ou pet na casa?
-          {/* fazer um select customizado */}
+          <SelectBoxes nomesBoxes={["Cão","Gato","Crianças pequenas","Outros"]} onSelect={()=> console.log()}/>
         </label>
 
 

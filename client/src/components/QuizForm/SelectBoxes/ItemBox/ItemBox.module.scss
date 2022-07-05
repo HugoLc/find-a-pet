@@ -1,0 +1,16 @@
+.itemBox{
+    padding: 7px 15px;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    
+    &:hover{
+        padding: 5px 13px;
+    }
+
+    &.selected{
+        background-color: greenyellow;
+    }
+}
+
