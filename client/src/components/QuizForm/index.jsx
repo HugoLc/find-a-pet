@@ -9,6 +9,9 @@ const QuizForm = () => {
   const [sexo, setSexo] = useState();
   const [idade, setIdade] = useState();
   const [porte, setPorte] = useState();
+  const [selectedPetList, setSelectedPetList] = useState([]);
+
+
 
 
   const [uf, setUf] = React.useState('AC');
@@ -20,8 +23,8 @@ const QuizForm = () => {
 
 
   useEffect(() => {
-    console.log("valueAtividade",valueAtividade)
-    console.log("valueDisponibilidade",valueDisponibilidade)
+    // console.log("valueAtividade",valueAtividade)
+    // console.log("valueDisponibilidade",valueDisponibilidade)
   
   }, [valueAtividade,valueDisponibilidade])
   
@@ -54,6 +57,15 @@ const QuizForm = () => {
       loadCity(uf);
     }
   }, [uf]);
+
+  const selectPetCrianca = (nome) => {
+    console.log("nome",nome)
+    /* if ( selectedIndex === -1) {
+      setSelectedPetList([...selectedPetList, nome])
+    } else {
+      setSelectedPetList(selectedPetList.splice(selectedIndex, 1))
+    } */
+  }
 
   return (
     <div className={styles.formWrapper}>
@@ -115,7 +127,7 @@ const QuizForm = () => {
           </select>
         </label>
         <label> Há outro crianças e/ou pet na casa?
-          <SelectBoxes nomesBoxes={["Cão","Gato","Crianças pequenas","Outros"]} onSelect={()=> console.log()}/>
+          <SelectBoxes nomesBoxes={["Cão","Gato","Crianças pequenas","Outros"]} onSelect={selectPetCrianca}/>
         </label>
 
 

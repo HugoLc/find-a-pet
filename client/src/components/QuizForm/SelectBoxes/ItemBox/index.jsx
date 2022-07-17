@@ -2,11 +2,11 @@ import React from 'react'
 import styles from './ItemBox.module.scss'
 import { useState } from 'react'
 
-const ItemBox = ({nome, setSelected}) => {
+const ItemBox = ({nome, returnSelected}) => {
     const [estadoBox,  setEstadoBox] = useState(false)
     const handleClick = ()=>{
         setEstadoBox(!estadoBox)
-        setSelected(nome)
+        returnSelected(nome)
     }
   return (
     <div className={`${styles.itemBox} ${estadoBox? styles.selected : ""}`} onClick={()=> handleClick()}>
