@@ -21,7 +21,8 @@ function fitness(quizData){
     return new Promise((resolve) =>{
         const filteredPets = filterPets();
         
-        // comparar rotina X temperamento
+        // comparar atividade X temperamento
+        // comparar disponibilidade X temperamento
 
         // comparar crianças X sociavel
 
@@ -31,7 +32,8 @@ function fitness(quizData){
 
         // comparar casa x ambiente
 
-        resolve(/* pet selecionado */)
+        // resolve(/* pet selecionado */)
+        resolve(quizData)
     })
 }
 
@@ -45,8 +47,11 @@ module.exports = {
             estado_quiz,
             cidade_quiz,
 
-            rotina_quiz,
+            atividade_quiz,
+            disponibilidade_quiz,
             casa_quiz,
+            cao_pet_quiz,
+            gato_pet_quiz,
             outros_pets_quiz,
             criancas_quiz
         } = req.body
@@ -58,8 +63,11 @@ module.exports = {
             porte_quiz,
             estado_quiz,
             cidade_quiz,
-            rotina_quiz,
+            atividade_quiz,
+            disponibilidade_quiz,
             casa_quiz,
+            cao_pet_quiz,
+            gato_pet_quiz,
             outros_pets_quiz,
             criancas_quiz
         }

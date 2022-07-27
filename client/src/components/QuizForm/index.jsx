@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import styles from './QuizForm.module.scss'
 import SelectBar from './SelectBar';
 import SelectBoxes from './SelectBoxes';
+import axios from 'axios'
 
 const QuizForm = () => {
   const [especie, setEspecie] = useState("todos");
@@ -15,7 +16,7 @@ const QuizForm = () => {
   const [listCity, setListCity] = React.useState([]);
   const [valueAtividade, setValueAtividade] = useState(0)
   const [valueDisponibilidade, setValueDisponibilidade] = useState(0)
-  const [residencia, setResidencia] = useState(0)
+  const [residencia, setResidencia] = useState("todos")
   const [selectedPetList, setSelectedPetList] = useState([]);
 
   const [formObject, setFormObject] = useState()
@@ -25,29 +26,36 @@ const QuizForm = () => {
   
 
   const handleSubmit = () => {
-    console.log("entrei")
     const formData = {
-      especie: especie.toUpperCase(),
-      sexo: sexo.toUpperCase(),
-      idade: idade.toUpperCase(),
-      porte: porte.toUpperCase(),
-      estado: uf.toUpperCase(),
-      cidade: city.toUpperCase(),
-      atividade: valueAtividade,
-      disponibilidade: valueDisponibilidade,
-      residencia: residencia.toUpperCase(),
-      criancas: selectedPetList.includes("Crianças pequenas"),
-      petCaes: selectedPetList.includes("Cão"),
-      petGatos: selectedPetList.includes("Gato"),
-      petOutros: selectedPetList.includes("Outros")
+      especie_quiz: especie.toUpperCase(),
+      sexo_quiz: sexo.toUpperCase(),
+      idade_quiz: idade.toUpperCase(),
+      porte_quiz: porte.toUpperCase(),
+      estado_quiz: uf.toUpperCase(),
+      cidade_quiz: city.toUpperCase(),
+      atividade_quiz: valueAtividade,
+      disponibilidade_quiz: valueDisponibilidade,
+      casa_quiz: residencia.toUpperCase(),
+      criancas_quiz: selectedPetList.includes("Crianças pequenas"),
+      cao_pet_quiz: selectedPetList.includes("Cão"),
+      gato_pet_quiz: selectedPetList.includes("Gato"),
+      outros_pets_quiz: selectedPetList.includes("Outros"),
     }
 
     setFormObject(formData)
   }
 
+  const apiRequest = async () => {
+    const response = await axios.post('http://localhost:5000/api/quiz', formObject)
+    console.log(response)
+  }
+
   useEffect(() => {
     /////////////////////////////////////// post api
-    formObject && console.log(formObject)
+    if (formObject) {
+      apiRequest()
+    }
+      
   }, [formObject])
   
 
