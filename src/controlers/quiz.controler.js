@@ -17,35 +17,37 @@ function handleQuizData({
     criancas_quiz
 }) {
     let formatedQuizData = {
-        especie_quiz,
-        sexo_quiz,
-        idade_quiz,
-        porte_quiz,
-        estado_quiz,
-        cidade_quiz,
-        atividade_quiz,
-        disponibilidade_quiz,
-        casa_quiz,
-        cao_pet_quiz,
-        gato_pet_quiz,
-        outros_pets_quiz,
-        criancas_quiz
+        especie_pet : especie_quiz,
+        sexo_pet : sexo_quiz,
+        idade_pet : idade_quiz,
+        porte_pet : porte_quiz,
+        estado_pet : estado_quiz,
+        cidade_pet : cidade_quiz,
+        /* atividade_pet : atividade_quiz,
+        disponibilidade_pet : disponibilidade_quiz,
+        casa_pet : casa_quiz,
+        cao_pet_pet : cao_pet_quiz,
+        gato_pet_pet : gato_pet_quiz,
+        outros_pets_pet : outros_pets_quiz,
+        criancas_pet : criancas_quiz */
     }
 
-    switch (especie_quiz) {
+    console.log(formatedQuizData)
+
+    switch (formatedQuizData.especie_pet) {
         case 'CACHORRO':
-            formatedQuizData.especie_quiz = "CAO"
+            formatedQuizData.especie_pet = "CAO"
             break;
         default:
             break;
     }
 
-    switch (sexo_quiz) {
+    switch (formatedQuizData.sexo_pet) {
         case 'MACHO':
-            formatedQuizData.sexo_quiz = "M"
+            formatedQuizData.sexo_pet = "M"
             break;
         case 'FÊMEA' || "FEMEA":
-            formatedQuizData.sexo_quiz = "F"
+            formatedQuizData.sexo_pet = "F"
             break;
         default:
             break;
@@ -67,50 +69,53 @@ function handleTodosField(filteredData) {
         resolve(filteredData)
     })
 }
+function removeInfo(filteredData, key) {
+    return new Promise((resolve) => {
+        Object.keys(filteredData).forEach((item) => {
+
+            if (item === key) {
+                // console.log(item)
+                delete filteredData[item]
+            }
+        })
+ 
+        resolve(filteredData)
+    })
+}
+
+
 
 function filterPets(quizData) {
     return new Promise(async (resolve) =>{
-        // filtrar por espécie
         const filteredData = handleQuizData(quizData)
-        //{{VERIFICAR SE É TODOS}}
-
+        // VERIFICAR SE É TODOS
         await handleTodosField(filteredData)
-
-        const {
-            idade_quiz,
-            porte_quiz,
-            sexo_quiz,
-            especie_quiz
-        }=filteredData
-
-        console.log({
-            idade_quiz,
-            porte_quiz,
-            sexo_quiz,
-            especie_quiz
-        })
-        const filteredPets = Pets.find({
-            especie_pet: especie_quiz,
-            sexo_pet: sexo_quiz,
-            idade_pet: idade_quiz,
-            porte_quiz: porte_quiz
-        })
-
+        
+        const filteredPets = await Pets.find(filteredData)
+        console.log("filteredData",filteredData)
         // SE FILTEREDPETS.DATA.LENGHT() === 0
             //TENTAR SEM A CIADADE
         // SE FILTEREDPETS.DATA.LENGHT() === 0
             //TENTAR SEM O ESTADO
-        
-
-        // filtrar por sexo
-
-        // filtrar por porte
-
-        // filtrar por estado
-        
-        // filtrar por cidade (se houver)
+            ESTADO PET TA VINDO NUMERO WTF
+        if (filteredPets.length === 0) {
+            const noCityInfo = await removeInfo(filteredData, "cidade_pet")
+            const petsWithoutCity = await Pets.find(noCityInfo)
+            console.log("noCityInfo", noCityInfo)
+            if (petsWithoutCity.length === 0) {
+                const noStateInfo = await removeInfo(noCityInfo,"estado_pet")
+                const petsWithoutState = await Pets.find(noStateInfo)
+                console.log("petsWithoutState", petsWithoutState)
+                resolve(petsWithoutState)
+            } else {
+                resolve(petsWithoutCity)
+            }
+            
+        } else {
+            resolve(filteredPets)
+        }
         // console.log(filteredPets)
-        resolve(filteredPets)
+        
     })
     
 }
