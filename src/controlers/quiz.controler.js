@@ -8,13 +8,7 @@ function handleQuizData({
     porte_quiz,
     estado_quiz,
     cidade_quiz,
-    atividade_quiz,
-    disponibilidade_quiz,
-    casa_quiz,
-    cao_pet_quiz,
-    gato_pet_quiz,
-    outros_pets_quiz,
-    criancas_quiz
+    
 }) {
     let formatedQuizData = {
         especie_pet : especie_quiz,
@@ -22,14 +16,7 @@ function handleQuizData({
         idade_pet : idade_quiz,
         porte_pet : porte_quiz,
         estado_pet : estado_quiz,
-        cidade_pet : cidade_quiz,
-        /* atividade_pet : atividade_quiz,
-        disponibilidade_pet : disponibilidade_quiz,
-        casa_pet : casa_quiz,
-        cao_pet_pet : cao_pet_quiz,
-        gato_pet_pet : gato_pet_quiz,
-        outros_pets_pet : outros_pets_quiz,
-        criancas_pet : criancas_quiz */
+        cidade_pet : cidade_quiz
     }
 
     console.log(formatedQuizData)
@@ -55,14 +42,10 @@ function handleQuizData({
 
     return formatedQuizData
 }
-
 function handleTodosField(filteredData) {
     return new Promise((resolve) => {
         Object.keys(filteredData).forEach((item) => {
-            // console.log(typeof filteredData[item]);
-            // console.log(filteredData)
             if (filteredData[item] === "TODOS") {
-                // console.log(item)
                 delete filteredData[item]
             }
         })
@@ -74,7 +57,6 @@ function removeInfo(filteredData, key) {
         Object.keys(filteredData).forEach((item) => {
 
             if (item === key) {
-                // console.log(item)
                 delete filteredData[item]
             }
         })
@@ -82,9 +64,6 @@ function removeInfo(filteredData, key) {
         resolve(filteredData)
     })
 }
-
-
-
 function filterPets(quizData) {
     return new Promise(async (resolve) =>{
         const filteredData = handleQuizData(quizData)
@@ -93,11 +72,6 @@ function filterPets(quizData) {
         
         const filteredPets = await Pets.find(filteredData)
         console.log("filteredData",filteredData)
-        // SE FILTEREDPETS.DATA.LENGHT() === 0
-            //TENTAR SEM A CIADADE
-        // SE FILTEREDPETS.DATA.LENGHT() === 0
-            //TENTAR SEM O ESTADO
-            ESTADO PET TA VINDO NUMERO WTF
         if (filteredPets.length === 0) {
             const noCityInfo = await removeInfo(filteredData, "cidade_pet")
             const petsWithoutCity = await Pets.find(noCityInfo)
@@ -114,10 +88,26 @@ function filterPets(quizData) {
         } else {
             resolve(filteredPets)
         }
-        // console.log(filteredPets)
         
     })
     
+}
+
+function rankThePets(quizData, filterPets) {
+    return new Promise((resolve) => {
+        const {
+            atividade_quiz,
+            disponibilidade_quiz,
+            casa_quiz,
+            cao_pet_quiz,
+            gato_pet_quiz,
+            outros_pets_quiz,
+            criancas_quiz
+        } = quizData
+        
+        console.log("quizData",quizData)
+
+    })
 }
 
 function fitness(quizData){
@@ -126,6 +116,7 @@ function fitness(quizData){
         // filtro de exclusão
         const filteredPets = await filterPets(quizData);
 
+        const rankedPets = await rankThePets(quizData, filterPets)
 
         // comparar atividade X temperamento
         // comparar disponibilidade X temperamento

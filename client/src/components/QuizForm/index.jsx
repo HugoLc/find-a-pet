@@ -102,7 +102,8 @@ const QuizForm = () => {
       <label> Qual seu estado?
         <select value={uf} onChange={e => setUf(e.target.value)}>
           {listUf.map((a, b) => ( 
-              <option key={b}value={a.id}>{a.sigla} - {a.nome}</option>
+              // <option key={b}value={a.id}>{a.sigla} - {a.nome}</option>
+              <option key={b}value={a.sigla}>{a.sigla} - {a.nome}</option>
           ))}
         </select>
       </label>
