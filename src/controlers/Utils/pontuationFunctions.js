@@ -143,4 +143,28 @@ module.exports = {
       resolve(point);
     });
   },
+  casa: function (pet, casa_quiz) {
+    return new Promise((resolve) => {
+      let point = 0;
+
+      if (casa_quiz !== "TODOS") {
+        if (casa_quiz === "CASA") {
+          if (pet.casa_pet.includes("CASA")) {
+            point++;
+          } else {
+            point--;
+          }
+        }
+        if (casa_quiz === "APARTAMENTO") {
+          if (pet.casa_pet.includes("APARTAMENTO")) {
+            point++;
+          } else {
+            point--;
+          }
+        }
+      }
+
+      resolve(point);
+    });
+  },
 };

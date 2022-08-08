@@ -90,7 +90,7 @@ function filterPets(quizData) {
 }
 
 function rankThePets(quizData, filteredPets) {
-  return new Promise(async (resolve) => {
+  return new Promise((resolve) => {
     const {
       atividade_quiz,
       disponibilidade_quiz,
@@ -103,11 +103,14 @@ function rankThePets(quizData, filteredPets) {
 
     let petsWithRank = filteredPets;
 
-    petsWithRank.forEach((pet) => {
+    petsWithRank.forEach(async (pet) => {
       pet.pontuation = 0;
       pet.pontuation += await setPontuation.atividade(pet, atividade_quiz);
-      pet.pontuation += await setPontuation.disponibilidade(pet, disponibilidade_quiz);
-      
+      pet.pontuation += await setPontuation.disponibilidade(
+        pet,
+        disponibilidade_quiz
+      );
+      pet.pontuation += await setPontuation.casa(pet.casa_quiz);
     });
   });
 }
