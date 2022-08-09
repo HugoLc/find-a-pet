@@ -167,4 +167,25 @@ module.exports = {
       resolve(point);
     });
   },
+  social: function (pet, social_quiz) {
+    let point = 0;
+
+    const { cao_pet_quiz, gato_pet_quiz, outros_pets_quiz, criancas_quiz } =
+      social_quiz;
+
+    if (
+      (cao_pet_quiz && pet.sociavel_pet.includes("CAO")) ||
+      pet.sociavel_pet.includes("CACHORRO")
+    ) {
+      pet.temperamento_pet.includes("AGRESSIVO") ? point-- : point++;
+    }
+
+    if (gato_pet_quiz && pet.sociavel_pet.includes("GATO")) {
+      pet.temperamento_pet.includes("AGRESSIVO") ? point-- : point++;
+    }
+
+    if (criancas_quiz && pet.sociavel_pet.includes("CRIANCAS")) {
+      pet.temperamento_pet.includes("AGRESSIVO") ? point-- : point++;
+    }
+  },
 };

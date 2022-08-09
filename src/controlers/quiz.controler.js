@@ -110,7 +110,13 @@ function rankThePets(quizData, filteredPets) {
         pet,
         disponibilidade_quiz
       );
-      pet.pontuation += await setPontuation.casa(pet.casa_quiz);
+      pet.pontuation += await setPontuation.casa(pet, casa_quiz);
+      pet.pontuation += await setPontuation.social(pet, {
+        cao_pet_quiz,
+        gato_pet_quiz,
+        outros_pets_quiz,
+        criancas_quiz,
+      });
     });
   });
 }
